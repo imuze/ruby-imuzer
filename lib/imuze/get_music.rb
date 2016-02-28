@@ -11,12 +11,14 @@ module Imuze
     end
 
     def call
-      sh command
+      sh command do |stdout, stderr|
+        puts 'We hope you liked it !'
+      end
     end
 
     private
 
     def command
-      %Q(curl "http:#{mp3_uri}"  -s -H "Content-Type: application/json"  -H "Authorization: #{token}" | mpg123 -)    end
+      %Q(curl "http:#{mp3_uri}"  -s -H "Content-Type: application/json"  -H "Authorization: #{token}" | mpg123 - 2> /dev/null)    end
   end
 end

@@ -9,11 +9,17 @@ class App
   include Methadone::CLILogging
 
   main do |email, password, duration, genre, subgenre, structure|
+    info 'Authenticating to iMuze ....'
     response = Imuze::CreateToken.call(email, password)
     token = response['token']
+    info "Composing your #{subgenre} #{genre} on iMuze ...."
+    start = Time.now
     response = Imuze::CreateMusic.call(token, duration,
                                        genre, subgenre, structure)
+    elapsed = Time.now - start
+    info "Done composing your music in #{elapsed} seconds"
     mp3_uri = response['mp3_uri']
+    info "Playing your #{subgenre} #{genre} music ...."
     Imuze::GetMusic.call(token, mp3_uri)
   end
 

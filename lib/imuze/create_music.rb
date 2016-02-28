@@ -37,24 +37,24 @@ module Imuze
         genre: genre,
         subgenre: subgenre,
         duration_ms: duration.to_i,
-        structure:[
-          {
-              energy: "calm",
-              start:0,
-              duration:0.33
-          },
-          {
-              energy:"medium",
-              start:0.33,
-              duration:0.33
-          },
-          {
-              energy:"dynamic",
-              start:0.66,
-              duration:0.33
-          }
-        ]
+        structure:music_structure
       }.to_json
+    end
+
+    def music_structure
+      array = []
+      time = 0.0
+      structure.split(',').each do |mov|
+        type, duration = mov.split(':')
+        hash = {
+          energy: type,
+          start: time.to_f,
+          duration: duration.to_f
+        }
+        array << hash
+        time += duration.to_f
+      end
+      array
     end
   end
 end

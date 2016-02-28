@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'methadone'
+require 'imuzer.rb'
+
+class App
+  include Methadone::Main
+  include Methadone::CLILogging
+
+  main do |email, password, duration, genre, subgenre, structure|
+    response = Imuze::CreateToken.call(email, password)
+    token = response['token']
+    response = Imuze::CreateMusic.call(token, duration,
+                                       genre, subgenre, structure)
+    mp3_uri = response['mp3_uri']
+    Imuze::GetMusic.call(token, mp3_uri)
+  end
+
+  version Imuzer::VERSION
+  description 'Composes a track with iMuze'
+  arg :email, 'Account email'
+  arg :password, 'Account password'
+  arg :duration, 'Track duration'
+  arg :genre, 'Track genre'
+  arg :subgenre, 'Track subgenre'
+  arg :structure, 'Track structure'
+  use_log_level_option toggle_debug_on_signal: 'USR1'
+  go!
+end

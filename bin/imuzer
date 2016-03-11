@@ -3,19 +3,23 @@
 require 'optparse'
 require 'methadone'
 require 'imuzer.rb'
+require 'json'
+require 'rainbow'
 
 class App
   include Methadone::Main
   include Methadone::CLILogging
 
-  main do |email, password, duration, genre, subgenre, structure|
+  main do |duration, genre, subgenre, structure|
     info 'Authenticating to iMuze ....'
-    response = Imuze::CreateToken.call(email, password)
+    response = Imuze::CreateToken.call(options[:email], options[:password])
     token = response['token']
     info "Composing your #{subgenre} #{genre} on iMuze ...."
     start = Time.now
     response = Imuze::CreateMusic.call(token, duration,
                                        genre, subgenre, structure)
+
+    puts JSON.pretty_generate(response) if options[:verbose]
     elapsed = Time.now - start
     info "Done composing your music in #{elapsed} seconds"
     mp3_uri = response['mp3_uri']
@@ -23,10 +27,12 @@ class App
     Imuze::GetMusic.call(token, mp3_uri)
   end
 
+  on('-e email','--email','your imuze account email')
+  on('-p password','--password','your imuze password')
+  on('-v','--verbose','Be verbose')
+
   version Imuzer::VERSION
   description 'Composes a track with iMuze'
-  arg :email, 'Account email'
-  arg :password, 'Account password'
   arg :duration, 'Track duration'
   arg :genre, 'Track genre'
   arg :subgenre, 'Track subgenre'

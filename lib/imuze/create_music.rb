@@ -37,7 +37,7 @@ module Imuze
         genre: genre,
         subgenre: subgenre,
         duration_ms: duration.to_i,
-        structure:music_structure
+        structure: music_structure
       }.to_json
     end
 

@@ -2,7 +2,9 @@ PATH
   remote: .
   specs:
     imuzer (0.0.1)
+      json (~> 1.8.3)
       methadone (~> 1.9.2)
+      rainbow (~> 2.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -37,6 +39,7 @@ GEM
       bundler
     multi_json (1.11.2)
     multi_test (0.1.2)
+    rainbow (2.1.0)
     rake (10.5.0)
     rdoc (4.2.2)
       json (~> 1.4)
@@ -62,6 +65,6 @@ DEPENDENCIES
   aruba
   bundler (~> 1.7)
   imuzer!
-  rake
+  rake (~> 10.0)
   rdoc
   rspec (~> 3)

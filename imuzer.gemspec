@@ -22,10 +22,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency('rdoc')
   spec.add_development_dependency('aruba')
-  spec.add_development_dependency('rake')
   spec.add_development_dependency('rspec', '~> 3')
 
   spec.add_dependency('methadone', '~> 1.9.2')
   spec.add_dependency('json', '~> 1.8.3')
-  spec.add_dependency('rainbow')
+  spec.add_dependency('rainbow', '~> 2.1.0')
 end

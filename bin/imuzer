@@ -13,17 +13,32 @@ class App
   main do |duration, genre, subgenre, structure|
     info 'Authenticating to iMuze ....'
     response = Imuze::CreateToken.call(options[:email], options[:password])
+    formated_json = JSON.pretty_generate(response)
+    if response['status'] == 500
+      puts Rainbow(formated_json).red
+      exit
+    else
+      puts Rainbow(formated_json).green if options[:verbose]
+    end
+
     token = response['token']
-    info "Composing your #{subgenre} #{genre} on iMuze ...."
+    info "Composing your track \"#{subgenre}\" \"#{genre}\" on iMuze .... please wait"
     start = Time.now
     response = Imuze::CreateMusic.call(token, duration,
                                        genre, subgenre, structure)
 
-    puts JSON.pretty_generate(response) if options[:verbose]
+    formated_json = JSON.pretty_generate(response)
+    if response['status'] == 500
+      puts Rainbow(formated_json).red
+      exit
+    else
+      puts Rainbow(formated_json).green if options[:verbose]
+    end
+
     elapsed = Time.now - start
     info "Done composing your music in #{elapsed} seconds"
     mp3_uri = response['mp3_uri']
-    info "Playing your #{subgenre} #{genre} music ...."
+    info "Playing your  \"#{subgenre}\" \"#{genre}\" mp3 from iMuze ...."
     Imuze::GetMusic.call(token, mp3_uri)
   end
 

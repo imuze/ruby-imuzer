@@ -1,7 +1,11 @@
 # Imuzer
 
 imuzer is a minimalistic gem that lets you generate music from the online music generation platform imuze.io.
-You will need an account on iMuze in order to use it.
+
+# Pre-requisits
+
+* You will need an account on iMuze in order to use it.
+* You will need to install `mpg123` to actually listen the mp3
 
 ## Installation
 
@@ -9,8 +13,8 @@ You will need an account on iMuze in order to use it.
 
 ## Usage
 
-    imuzer --help
-    Usage: imuzer [options] email password duration genre subgenre structure
+    [yacin@mac imuzer (master)]$ bundle exec bin/imuzer -h
+    Usage: imuzer [options] duration genre subgenre structure
 
     Composes a track with iMuze
 
@@ -18,6 +22,9 @@ You will need an account on iMuze in order to use it.
 
     Options:
         -h, --help                       Show command line help
+        -e, --email email                your imuze account email
+        -p, --password password          your imuze password
+        -v, --verbose                    Be verbose
             --version                    Show help/version info
             --log-level LEVEL            Set the logging level
                                          (debug|info|warn|error|fatal)
@@ -25,10 +32,6 @@ You will need an account on iMuze in order to use it.
 
     Arguments:
 
-        email
-            Account email
-        password
-            Account password
         duration
             Track duration
         genre
@@ -37,10 +40,10 @@ You will need an account on iMuze in order to use it.
             Track subgenre
         structure
             Track structure
-        
-Bellow is an example on how to use the tool:    
 
-    imuzer me@example my_password 55000 edm soft 'medium:0.1,calm:0.75,medium:0.15'
+Bellow is an example on how to use the tool:
+
+    bundle exec bin/imuzer -v -e beguelin@gmail.com -p cH5tRaXu 30000 edm soft 'calm:0.3,medium:0.3,dynamic:0.3'
 
 ## Contributing
 

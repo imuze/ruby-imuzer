@@ -20,8 +20,8 @@ You will need an account on iMuze in order to use it.
         -h, --help                       Show command line help
             --version                    Show help/version info
             --log-level LEVEL            Set the logging level
-                                     (debug|info|warn|error|fatal)
-                                     (Default: info)
+                                         (debug|info|warn|error|fatal)
+                                         (Default: info)
 
     Arguments:
 
@@ -38,7 +38,7 @@ You will need an account on iMuze in order to use it.
         structure
             Track structure
         
-    Bellow is an example on how to use the tool:    
+Bellow is an example on how to use the tool:    
 
     imuzer me@example my_password 55000 edm soft 'medium:0.1,calm:0.75,medium:0.15'
 

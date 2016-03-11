@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "imuzer"
   spec.version       = Imuzer::VERSION
   spec.authors       = ["Yacin Bahi"]
-  spec.email         = ["yacinb@ybsis.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.email         = ["yacin@imuze.io"]
+  spec.summary       = %q{Generate music with iMuze.}
+  spec.description   = %q{This gem uses the iMuze (imuze.io) API to generate music. You'll need an account on iMuze.io in order to use it.}
   spec.homepage      = ""
   spec.license       = "custom"
 

@@ -13,7 +13,8 @@ imuzer is a minimalistic gem that lets you generate music from the online music 
 
 ## Usage
 
-    [yacin@mac imuzer (master)]$ bundle exec bin/imuzer -h
+    [yacin@mac imuzer (master)]$ imuzer -h
+
     Usage: imuzer [options] duration genre subgenre structure
 
     Composes a track with iMuze
@@ -43,7 +44,7 @@ imuzer is a minimalistic gem that lets you generate music from the online music 
 
 Bellow is an example on how to use the tool:
 
-    bundle exec bin/imuzer -v -e beguelin@gmail.com -p cH5tRaXu 30000 edm soft 'calm:0.3,medium:0.3,dynamic:0.3'
+    [yacin@mac imuzer (master)]$ imuzer -v -e MYEMAIL -p MYPASSWORD 30000 edm soft 'calm:0.3,medium:0.3,dynamic:0.3'
 
 ## Contributing
 

@@ -1,5 +1,5 @@
 module Imuze
-  class CreateMusic < Struct.new(:token, :duration, :genre, :subgenre, :structure)
+  class CreateMusic < Struct.new(:token, :duration, :genre, :subgenre, :structure, :options)
     require 'uri'
     require 'net/http'
     require 'json'
@@ -33,12 +33,28 @@ module Imuze
     end
 
     def request_body
-      {
+      hash = {
         genre: genre,
         subgenre: subgenre,
         duration_ms: duration.to_i,
         structure: music_structure
-      }.to_json
+      }
+      hash.merge!(crop: crop) if crop
+      hash.merge!(fadeout_ms: fadeout_ms) if fadeout_ms
+      hash.merge!(voices_volume: voices_volume) if voices_volume
+      hash.to_json
+    end
+
+    def crop
+      options.nil? ? nil : options[:crop]
+    end
+
+    def fadeout_ms
+      options.nil? ? nil : options[:fadeout_ms]
+    end
+
+    def voices_volume
+      options.nil? ? nil : options[:voices_volume]
     end
 
     def music_structure

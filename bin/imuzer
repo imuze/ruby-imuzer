@@ -55,7 +55,6 @@ command :compose do |c|
     help_now!('You need wget installed on your computer to continue') unless FindExecutable.call('wget')
     exit_now!('You need curl installed on your computer to continue') unless FindExecutable.call('curl')
     exit_now!('You need mpg123 installed on your computer to continue') unless FindExecutable.call('mpg123')
-    exit_now!('You need mpg123 installed on your computer to continue') unless FindExecutable.call('mpg123')
     genre = args[0]
     subgenre = args[1]
     duration = args[2]

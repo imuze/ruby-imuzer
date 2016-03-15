@@ -64,7 +64,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aruba
+  aruba (~> 0.14.0)
   bundler (~> 1.7)
   imuzer!
   rake (~> 10.0)

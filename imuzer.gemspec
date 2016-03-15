@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['yacin@imuze.io']
   spec.summary       = %q{Generate music with iMuze.}
   spec.description   = %q{This gem uses the iMuze (imuze.io) API to generate music. You'll need an account on iMuze.io in order to use it.}
-  spec.homepage      = 'https://rubygems.org/gems/imuzer'
+  spec.homepage      = 'https://github.com/imuze/ruby-imuzer'
   spec.license       = 'custom'
 
   spec.files         = `git ls-files -z`.split("\x0")

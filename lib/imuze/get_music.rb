@@ -24,7 +24,7 @@ module Imuze
     end
 
     def command_download
-      command = %Q(wget "http:#{mp3_uri}" -O #{mp3_id}.mp3)
+      command = %Q(wget "http:#{mp3_uri}" -O #{mp3_id}.mp3 --header "Authorization: #{token}")
       sh command do |stdout, stderr|
         puts 'We hope you liked it !'
       end
@@ -35,7 +35,6 @@ module Imuze
     end
 
     def mp3_id
-      puts mp3_uri.split('/')
       mp3_uri.split('/')[4]
     end
   end

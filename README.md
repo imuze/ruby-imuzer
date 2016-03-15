@@ -13,38 +13,57 @@ imuzer is a minimalistic gem that lets you generate music from the online music 
 
 ## Usage
 
-    [yacin@mac imuzer (master)]$ imuzer -h
+    [yacin@mac imuzer (master)]$ bundle exec bin/imuzer -h
+    NAME
+        imuzer - a demo tool for iMuze API
 
-    Usage: imuzer [options] duration genre subgenre structure
+    SYNOPSIS
+        imuzer [global options] command [command options] [arguments...]
 
-    Composes a track with iMuze
+    GLOBAL OPTIONS
+        -e, --email=email       - Email from your iMuze user account (default: none)
+        --help                  - Show this message
+        -p, --password=password - Password from your iMuze user account (default: none)
+        -v, --[no-]verbose      - Be verbose
 
-    v0.0.1
+    COMMANDS
+        compose - composes a music
+        genres  - list all musical genres and subgenres
+        help    - Shows a list of commands or help for one command
 
-    Options:
-        -h, --help                       Show command line help
-        -e, --email email                your imuze account email
-        -p, --password password          your imuze password
-        -v, --verbose                    Be verbose
-            --version                    Show help/version info
-            --log-level LEVEL            Set the logging level
-                                         (debug|info|warn|error|fatal)
-                                         (Default: info)
+### Example 1: list all musical genres
 
-    Arguments:
+    [yacin@mac imuzer (master)]$ imuzer genres
 
-        duration
-            Track duration
-        genre
-            Track genre
-        subgenre
-            Track subgenre
-        structure
-            Track structure
+### Example 2: compose and play music
 
-Bellow is an example on how to use the tool:
+    [yacin@mac imuzer (master)]$ imuzer -e 'me@example.com' -p 'thispiggywent' compose rock dynamic 30000 'calm:0.2,medium:0.4,dynamic:0.2,calm:0.2'
 
-    [yacin@mac imuzer (master)]$ imuzer -v -e MYEMAIL -p MYPASSWORD 30000 edm soft 'calm:0.3,medium:0.3,dynamic:0.3'
+### Example 3: compose and download music
+
+    [yacin@mac imuzer (master)]$ imuzer -e 'me@example.com' -p 'thispiggywent' compose rock dynamic 30000 'calm:0.2,medium:0.4,dynamic:0.2,calm:0.2' -d
+
+_note_: flag `-d` at the end of the command line
+
+### Example 3: compose and play music with low volume on vocals (-10db)
+
+    [yacin@mac imuzer (master)]$ bundle exec bin/imuzer compose -h
+    NAME
+        compose - composes a music
+
+    SYNOPSIS
+        imuzer [global options] compose [command options] genre subgenre duration structure
+
+    COMMAND OPTIONS
+        -c, --[no-]crop               -
+        -d, --[no-]download           -
+        --fadeout_ms=fadeout_ms       - fadeout in milliseconds (default: none)
+        --voices_volume=voices_volume - volume of voice track (default: none)
+
+
+    [yacin@mac imuzer (master)]$ imuzer -e 'me@example.com' -p 'thispiggywent' compose rock dynamic 30000 'calm:0.2,medium:0.4,dynamic:0.2,calm:0.2' --voices_volume=-10
+
+_note_: flag `--voices_volume=-10 db` at the end of the command line
 
 ## Contributing
 

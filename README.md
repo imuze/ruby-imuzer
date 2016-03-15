@@ -1,3 +1,5 @@
+[ ![Codeship Status for imuze/ruby-imuzer](https://codeship.com/projects/f4b54010-cd04-0133-3aa4-7a44370e5504/status?branch=master)](https://codeship.com/projects/140422)
+
 # Imuzer
 
 imuzer is a minimalistic gem that lets you generate music from the online music generation platform imuze.io.

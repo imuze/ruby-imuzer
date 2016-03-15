@@ -8,6 +8,7 @@ require 'rainbow'
 
 include GLI::App
 program_desc 'a demo tool for iMuze API'
+long_desc 'iMuzer is a tool that lets you interact with the music composition platform iMuze.io. You will need an account on iMuze.io in order to use the API. Email us at developers@imuze.io to get a developer account. You will need to have wget, curl and mpg123 installed on your computer to use all the feature of this tool.'
 
 desc 'Be verbose'
 switch [:v, :verbose]
@@ -22,8 +23,8 @@ flag [:p, :password]
 
 desc 'list all musical genres and subgenres'
 command :genres do |c|
-  puts 'Listing iMuze musical genres with sub-genres...'
   c.action do |global_options, options, args|
+    puts 'Listing iMuze musical genres with sub-genres...'
     response = Imuze::GetGenres.call global_options
     response['genres'].each do |genre|
       print " #{genre['name']}: "
@@ -40,6 +41,7 @@ arg 'duration', :required
 arg 'structure', :required
 command :compose do |c|
   c.switch [:c, :crop]
+  c.switch [:d, :download]
   c.flag 'fadeout_ms', arg_name: 'fadeout_ms',
                        type: Integer,
                        desc: 'fadeout in milliseconds'
@@ -50,6 +52,10 @@ command :compose do |c|
   c.action do |global_options, options, args|
     help_now!('credentials required to compose music') if global_options[:email].nil? || global_options[:password].nil?
     help_now!('id is required') if args.size < 3
+    help_now!('You need wget installed on your computer to continue') unless FindExecutable.call('wget')
+    exit_now!('You need curl installed on your computer to continue') unless FindExecutable.call('curl')
+    exit_now!('You need mpg123 installed on your computer to continue') unless FindExecutable.call('mpg123')
+    exit_now!('You need mpg123 installed on your computer to continue') unless FindExecutable.call('mpg123')
     genre = args[0]
     subgenre = args[1]
     duration = args[2]
@@ -71,7 +77,7 @@ command :compose do |c|
     puts "Done composing your music in #{elapsed} seconds"
     mp3_uri = response['mp3_uri']
     puts "Playing your #{music} mp3 from iMuze ...."
-    Imuze::GetMusic.call token, mp3_uri
+    Imuze::GetMusic.call token, mp3_uri, options
   end
 end
 
